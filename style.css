@@ -1,0 +1,418 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+html, body, [class*="css"], .stApp {
+    background-color: #ffffff !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 18px;
+}
+.stMarkdown p, .stMarkdown li {
+    font-size: 1.1rem !important;
+    line-height: 1.65 !important;
+    color: #1d1d1f;
+}
+.stMarkdown h1 { font-size: 2.8rem !important; letter-spacing: -0.03em; }
+.stMarkdown h2 { font-size: 2.1rem !important; letter-spacing: -0.02em; }
+.stMarkdown h3 { font-size: 1.6rem !important; letter-spacing: -0.01em; }
+
+/* Hide Streamlit's native top header so it can never overlap our content/sidebar */
+header[data-testid="stHeader"] { display: none !important; height: 0 !important; }
+[data-testid="stToolbar"] { display: none !important; }
+#MainMenu, footer { display: none !important; }
+.stApp > header { display: none !important; }
+
+.block-container {
+    background-color: transparent !important;
+    padding: 2rem 360px 3rem 2.5rem !important; /* right padding > sidebar width to guarantee no overlap */
+    max-width: 100% !important;
+}
+/* Kill the outer Streamlit app container styling that creates a phantom card behind everything */
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewContainer"] > .main,
+[data-testid="stAppViewContainer"] section.main,
+section.main > .block-container {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+/* Sidebar (left, hidden anyway) */
+section[data-testid="stSidebar"] {
+    background-color: rgba(245, 245, 247, 0.6) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-right: 1px solid rgba(229, 229, 231, 0.5) !important;
+    width: 320px !important;
+}
+[data-testid="stSidebarUserContent"] { padding-top: 1rem !important; }
+
+/* Hide default slider label space */
+.stSlider > div:first-child { display: none; }
+
+/* Apple macOS Slider Fill - Chill Blue */
+.stApp { --primary-color: #60a5fa !important; }
+.stSlider div[data-baseweb="slider"] > div > div > div:nth-child(1) {
+    background: #60a5fa !important;
+}
+.stSlider [data-baseweb="slider"] div[role="slider"] {
+    background: #ffffff !important; border: 0.5px solid rgba(0,0,0,0.1) !important;
+    width: 22px !important; height: 22px !important;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15), 0 1px 1px rgba(0,0,0,0.1) !important;
+}
+
+/* Make Bordered Containers Look Like White Cards — target the wrapper itself,
+   not its inner div, so we don't stack two boxes. Reset Streamlit's default
+   gray border that would otherwise sit behind our white card. */
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background: #ffffff !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(0,0,0,0.06) !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02) !important;
+    padding: 1.5rem 1.5rem 1rem 1.5rem !important;
+}
+/* Kill the inner wrapper's own styling so it doesn't double-up */
+div[data-testid="stVerticalBlockBorderWrapper"] > div,
+div[data-testid="stVerticalBlockBorderWrapper"] > div > div {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+/* Prevent nested bordered containers from also rendering as cards */
+div[data-testid="stVerticalBlockBorderWrapper"] div[data-testid="stVerticalBlockBorderWrapper"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+/* Graph Cards */
+[data-testid="stImage"] img {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.03);
+    max-width: 100%;
+    height: auto;
+}
+[data-testid="stMetricLabel"] {
+    font-size: 0.8rem !important; font-weight: 600 !important;
+    color: #86868b !important; text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+}
+[data-testid="stMetricValue"] {
+    font-size: 2.1rem !important; font-weight: 700 !important;
+    color: #1d1d1f !important; letter-spacing: -0.04em !important;
+}
+
+.stButton > button {
+    background: #0071e3 !important; color: #ffffff !important;
+    border: none !important; border-radius: 8px !important;
+    font-weight: 500 !important; font-size: 0.85rem !important;
+    padding: 0.5rem 1rem !important; width: 100% !important;
+}
+.stButton > button:hover { background: #0077ed !important; }
+
+.stDataFrame { border-radius: 10px !important; overflow: hidden; }
+.stDataFrame * { font-size: 0.8rem !important; }
+
+.stSlider [data-testid="stTickBar"] { display: none !important; }
+
+/* Hide left sidebar */
+section[data-testid="stSidebar"], [data-testid="collapsedControl"] {
+    display: none !important;
+}
+
+/* TABS */
+.stTabs [data-baseweb="tab-list"] {
+    background-color: #e5e5ea !important;
+    border-radius: 14px !important;
+    padding: 6px !important;
+    gap: 12px !important;
+    border: none !important;
+    margin-bottom: 1.5rem !important;
+    margin-top: 1.5rem !important;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    flex-wrap: wrap !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+}
+.stTabs [data-baseweb="tab"] {
+    padding: 12px 24px !important;
+    border-radius: 10px !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: #86868b !important;
+    font-weight: 500 !important;
+    font-size: 1.05rem !important;
+    transition: all 0.2s ease;
+}
+.stTabs [data-baseweb="tab"]:hover { color: #1d1d1f !important; }
+.stTabs [aria-selected="true"] {
+    background-color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1) !important;
+    color: #0071e3 !important;
+    font-weight: 700 !important;
+}
+.stTabs [aria-selected="true"] * {
+    color: #0071e3 !important;
+    font-weight: 700 !important;
+}
+.stTabs [data-baseweb="tab-highlight"] { display: none !important; }
+.stTabs { border-bottom: none !important; }
+
+/* Right Sidebar — fixed, behind nothing, with a hard top-stop so it doesn't bleed under anything */
+#right-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    height: 100vh;
+    background-color: rgba(245, 245, 247, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(229, 229, 231, 0.6);
+    padding: 2rem 1.5rem 2rem 1.5rem;
+    z-index: 100;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+#right-sidebar h2, #right-sidebar h3 {
+    margin-top: 0; font-size: 1.25rem; color: #1d1d1f; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px;
+}
+#right-sidebar p {
+    font-size: 0.95rem; color: #555; line-height: 1.55; margin-bottom: 0;
+}
+#right-sidebar hr {
+    border: none; border-top: 1px solid rgba(0,0,0,0.08); margin: 1.5rem 0;
+}
+#right-sidebar a {
+    display: flex; align-items: center; gap: 8px;
+    text-decoration: none; color: #0071e3; font-weight: 600; font-size: 1rem;
+}
+#right-sidebar li { margin-bottom: 16px; }
+#right-sidebar .subtext {
+    color: #86868b; font-size: 0.85rem; margin-top: 4px; line-height: 1.45;
+}
+
+/* ── RESPONSIVE: collapse right sidebar on narrow viewports ────────────────── */
+@media (max-width: 1200px) {
+    #right-sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        margin-top: 2rem;
+        border-left: none;
+        border-top: 1px solid rgba(229, 229, 231, 0.6);
+    }
+    .block-container {
+        padding: 2rem 2rem 3rem 2rem !important;
+    }
+}
+
+/* Make sure narrative cards never overflow horizontally */
+.element-container, .stMarkdown, .stPlotlyChart, [data-testid="stHorizontalBlock"] {
+    max-width: 100%;
+    overflow-x: visible;
+}
+[data-testid="stHorizontalBlock"] {
+    gap: 1.25rem !important;
+}
+
+/* Prevent stat cards / pill rows from spilling out of their column */
+[data-testid="column"] {
+    min-width: 0 !important;
+    overflow-wrap: break-word;
+}
+
+
+/* TWO-LAYER FIXED HEADER */
+
+.st-key-ringo_header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 320px !important;
+    width: calc(100% - 320px) !important;
+    height: 100px !important;
+    z-index: 999999 !important;
+    background: #ffffff !important;
+    border-bottom: none !important;
+    padding: 0 3rem !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+}
+.st-key-ringo_header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #ffffff !important;
+    z-index: -1;
+}
+.st-key-ringo_header > div,
+.st-key-ringo_header [data-testid="stVerticalBlock"],
+.st-key-ringo_header [data-testid="element-container"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+}
+
+.st-key-ringo_controls {
+    position: fixed !important;
+    top: 100px !important;
+    left: 0 !important;
+    right: 320px !important;
+    width: calc(100% - 320px) !important;
+    height: 60px !important;
+    z-index: 999998 !important;
+    background: #f4f4f5 !important;
+    border-bottom: 1px solid rgba(0,0,0,0.06) !important;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.05) !important;
+    padding: 0 3rem !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
+}
+.st-key-ringo_controls::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #f4f4f5 !important;
+    z-index: -1;
+}
+.st-key-ringo_controls > div { width: 100% !important; }
+.st-key-ringo_controls div[data-testid="stHorizontalBlock"] {
+    align-items: center !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    align-items: center !important;
+    gap: 2rem !important;
+}
+.st-key-ringo_controls [data-testid="stVerticalBlockBorderWrapper"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+}
+
+/* Tabs pulled into the right side of Layer 1 */
+[data-testid="stTabs"] [data-baseweb="tab-list"] {
+    position: fixed !important;
+    top: 25px !important;
+    right: calc(320px + 3rem) !important;
+    z-index: 1000000 !important;
+    margin: 0 !important;
+    padding: 4px !important;
+    background: #e5e5ea !important;
+    border-radius: 8px !important;
+    border: none !important;
+    gap: 4px !important;
+    width: auto !important;
+}
+.stTabs [data-baseweb="tab"] {
+    padding: 8px 16px !important;
+    border-radius: 6px !important;
+    font-size: 0.9rem !important;
+    font-weight: 500 !important;
+    background: transparent !important;
+    color: #86868b !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+.stTabs [aria-selected="true"] {
+    background: #ffffff !important;
+    color: #0071e3 !important;
+    font-weight: 600 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+}
+.stTabs [data-baseweb="tab"] {
+    padding: 8px 20px !important;
+    font-size: 0.95rem !important;
+}
+
+/* Push page content below BOTH fixed bars */
+section.main .block-container,
+.block-container {
+    padding-top: 180px !important;
+    padding-left: 3rem !important;
+    padding-right: calc(320px + 3rem) !important;
+}
+
+/* Brand cluster */
+.rph-brand { display: flex; align-items: center; gap: 18px; }
+.rph-logo img {
+    width: 44px !important; height: 44px !important;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
+}
+.rph-titlewrap { line-height: 1; }
+.rph-title {
+    font-size: 2.0rem; font-weight: 700;
+    color: #1d1d1f; letter-spacing: -0.04em;
+}
+.rph-title-accent { color: #0071e3; font-weight: 700; }
+
+.rph-settings-label {
+    font-size: 1.05rem;
+    color: #1d1d1f;
+    font-weight: 500;
+    text-align: right;
+    padding-right: 0.5rem;
+}
+
+.rph-inline { display: flex; align-items: center; }
+.rph-label {
+    font-size: 0.95rem; font-weight: 500;
+    color: #1d1d1f;
+    white-space: nowrap;
+    margin-right: 0.75rem;
+    text-transform: none !important;
+    letter-spacing: 0 !important;
+}
+
+.st-key-ringo_controls .stSlider {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 15px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.st-key-ringo_controls .stSlider label {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: auto !important;
+    white-space: nowrap !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    color: #1d1d1f !important;
+}
+.st-key-ringo_controls .stSlider > div[data-testid="stSliderTickBar"],
+.st-key-ringo_controls .stSlider [data-testid="stTickBar"],
+.st-key-ringo_controls .stSlider [data-baseweb="slider"] > div:last-child { display: none !important; }
+.st-key-ringo_controls [data-testid="stMarkdownContainer"] p { margin: 0 !important; }
+
+/* Force columns in the controls row to vertically center */
+.st-key-ringo_controls [data-testid="stHorizontalBlock"] {
+    align-items: center !important;
+}
+.st-key-ringo_controls [data-testid="column"] {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+}
+.st-key-ringo_controls [data-testid="column"]:first-child {
+    justify-content: flex-end !important;
+}
+.st-key-ringo_controls [data-testid="stMarkdownContainer"] {
+    width: 100% !important;
+}
